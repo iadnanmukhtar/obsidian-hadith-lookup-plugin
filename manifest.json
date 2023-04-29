@@ -1,0 +1,10 @@
+{
+	"id": "obsidian-hadith-lookup",
+	"name": "Hadith Lookup",
+	"version": "0.1.0",
+	"minAppVersion": "0.1.0",
+	"description": "This plugin uses selected text as a reference ID to lookup and insert Quran and Hadith text and translation from https://hadith.quranunlocked.com",
+	"author": "Adnan Mukhtar",
+	"authorUrl": "https://hadith.quranlocked.com",
+	"isDesktopOnly": false
+}
