@@ -10,7 +10,7 @@ interface HadithLookupSettings {
 const DEFAULT_SETTINGS: HadithLookupSettings = {
 	api: 'https://hadith.quranunlocked.com/{result.ref}?json',
 	quranTemplate:
-`> [!note]
+		`> [!note]
 > {result[0].chapter.title} {result[0].num_ar} - {result[0].body}
 > 
 > [[{result[0].chapter.title_en} {result[0].num}]] - {result[0].body_en}
@@ -18,14 +18,14 @@ const DEFAULT_SETTINGS: HadithLookupSettings = {
 
 `,
 	passageTemplate:
-`> [!note]
+		`> [!note]
 > {result[0].chapter.title} {result[0].num_ar} - {result[0].body}
 > 
 > [[{result[0].chapter.title_en} {result[0].num}]] - {result[0].body_en}
 
 `,
 	hadithTemplate:
-`> [!tip] {result[0].title_en}
+		`> [!tip] {result[0].title_en}
 > {result[0].book.shortName} {result[0].num} - {result[0].chain}
 > {result[0].body} 
 > {result[0].footnote} – {result[0].grade.grade} ({result[0].grader. shortName})
@@ -52,7 +52,7 @@ export default class HadithLookupPlugin extends Plugin {
 
 		this.addCommand({
 			id: 'fetch-hadith-command',
-			name: 'Fetch Hadith',
+			name: 'Fetch Quran or Hadith',
 			editorCallback: async (editor: Editor, view: MarkdownView) => {
 				let ref = editor.getSelection();
 				let templateType = 'hadith';
@@ -62,13 +62,12 @@ export default class HadithLookupPlugin extends Plugin {
 					ref = ref.replace(/^quran/, 'passage');
 					templateType = 'passage';
 				}
-				console.log(ref);
 				try {
 					const res = await fetch(fillIn(this.settings.api, { ref: ref }));
 					const resStr = await res.text();
 					const result = (resStr === '') ? {} : JSON.parse(resStr);
 					result[0].num = (result[0].num + '').replace(/:/, '\ua789');
-					
+
 					if (templateType === 'hadith')
 						editor.replaceSelection(fillIn(this.settings.hadithTemplate, result));
 					else if (templateType === 'quran')
@@ -77,7 +76,30 @@ export default class HadithLookupPlugin extends Plugin {
 						editor.replaceSelection(fillIn(this.settings.passageTemplate, result));
 					else
 						editor.replaceSelection(JSON.stringify(result[0]));
-					
+
+				} catch (error) {
+					new Notice(`Lookup Failed: ${error.message}`);
+					console.error(error.stack);
+				}
+
+			}
+		});
+
+		this.addCommand({
+			id: 'search-hadith-command',
+			name: 'Search Hadith Unlocked',
+			editorCallback: async (editor: Editor, view: MarkdownView) => {
+				try {
+
+					const res = await fetch('https://hadith.quranunlocked.com?json&q=' + editor.getSelection());
+					let resStr = await res.text();
+					resStr = resStr.replace(/<\/?i>/g, '');
+					const result = (resStr === '') ? {} : JSON.parse(resStr);
+					let text = '';
+					for (let i = 0; i < result.length && i < 5; i++)
+						text += `> ${result[i].book_shortName} – ${result[i].body}\n> ${result[i].book_alias}:${result[i].num} – ${result[i].body_en}\n\n`;
+					editor.replaceSelection(`* * *\n\n${text}* * *\n`);
+
 				} catch (error) {
 					new Notice(`Lookup Failed: ${error.message}`);
 					console.error(error.stack);
