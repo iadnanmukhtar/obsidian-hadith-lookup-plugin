@@ -58,7 +58,7 @@ export default class HadithLookupPlugin extends Plugin {
 				let templateType = 'hadith';
 				if (ref.startsWith('quran'))
 					templateType = 'quran';
-				if (ref.match(/^quran:\d+:\d+-\d+/)) {
+				if (ref.match(/^quran:.+:\d+-\d+/)) {
 					ref = ref.replace(/^quran/, 'passage');
 					templateType = 'passage';
 				}
