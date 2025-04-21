@@ -8,7 +8,7 @@ interface HadithLookupSettings {
 }
 
 const DEFAULT_SETTINGS: HadithLookupSettings = {
-	api: 'https://hadith.quranunlocked.com/{result.ref}?json',
+	api: 'https://hadithunlocked.com/{result.ref}?json',
 	quranTemplate:
 		`> [!note]
 > {result[0].chapter.title} {result[0].num_ar} - {result[0].body}
@@ -54,13 +54,16 @@ export default class HadithLookupPlugin extends Plugin {
 			id: 'fetch-hadith-command',
 			name: 'Fetch Quran or Hadith',
 			editorCallback: async (editor: Editor, view: MarkdownView) => {
-				let ref = editor.getSelection();
+				let ref = editor.getSelection().trim();
 				let templateType = 'hadith';
 				if (ref.startsWith('quran'))
 					templateType = 'quran';
-				if (ref.match(/^quran:.+:\d+-\d+/)) {
+				if (ref.match(/^quran:.+:\d+-\d+/) || ref.match(/^quran:.+:\d+/)) {
 					ref = ref.replace(/^quran/, 'passage');
 					templateType = 'passage';
+				}
+				if (ref.match(/^quran:.+:\d+/)) {
+					ref = ref.replace(/(\d+)/, '$1-$1');
 				}
 				try {
 					const res = await fetch(fillIn(this.settings.api, { ref: ref }));
@@ -91,7 +94,7 @@ export default class HadithLookupPlugin extends Plugin {
 			editorCallback: async (editor: Editor, view: MarkdownView) => {
 				try {
 
-					const res = await fetch('https://hadith.quranunlocked.com?json&q=' + editor.getSelection());
+					const res = await fetch('https://hadithunlocked.com?json&q=' + editor.getSelection());
 					let resStr = await res.text();
 					resStr = resStr.replace(/<\/?i>/g, '');
 					const result = (resStr === '') ? {} : JSON.parse(resStr);
