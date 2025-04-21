@@ -3,8 +3,8 @@
 	"name": "Hadith Lookup",
 	"version": "1.0.0",
 	"minAppVersion": "0.0.0",
-	"description": "An Obsidian plugin that uses selected text as a reference ID to lookup and insert Quran and Hadith text and translation using the Ḥadīth Unlocked API (https://hadith.quranunlocked.com)",
+	"description": "An Obsidian plugin that uses selected text as a reference ID to lookup and insert Quran and Hadith text and translation using the Ḥadīth Unlocked API (https://hadithquranunlocked.com)",
 	"author": "Adnan Mukhtar",
-	"authorUrl": "https://linktr.ee/adnanmukhtar72",
+	"authorUrl": "https://linktr.ee/i.adnan.mukhtar",
 	"isDesktopOnly": false
 }
