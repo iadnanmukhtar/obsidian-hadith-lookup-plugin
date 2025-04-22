@@ -45,11 +45,6 @@ export default class HadithLookupPlugin extends Plugin {
 
 		await this.loadSettings();
 
-		const ribbonIconEl = this.addRibbonIcon('book', 'Hadith Lookup', (evt: MouseEvent) => {
-		});
-		// Perform additional things with the ribbon
-		ribbonIconEl.addClass('my-plugin-ribbon-class');
-
 		this.addCommand({
 			id: 'fetch-hadith-command',
 			name: 'Fetch Quran or Hadith',
@@ -113,9 +108,6 @@ export default class HadithLookupPlugin extends Plugin {
 
 		this.addSettingTab(new HadithLookupSettingTab(this.app, this));
 
-	}
-
-	onunload() {
 	}
 
 	async loadSettings() {
@@ -202,4 +194,3 @@ function fillIn(s: string, result: any) {
 	}
 	return s;
 }
-
