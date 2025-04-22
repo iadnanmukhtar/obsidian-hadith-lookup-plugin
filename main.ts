@@ -15,7 +15,6 @@ const DEFAULT_SETTINGS: HadithLookupSettings = {
 > 
 > [[{result[0].chapter.title_en} {result[0].num}]] - {result[0].body_en}
 
-
 `,
 	passageTemplate:
 		`> [!note]
@@ -46,7 +45,7 @@ export default class HadithLookupPlugin extends Plugin {
 		await this.loadSettings();
 
 		this.addCommand({
-			id: 'fetch-hadith-command',
+			id: 'fetch-hadith',
 			name: 'Fetch Quran or Hadith',
 			editorCallback: async (editor: Editor, view: MarkdownView) => {
 				let ref = editor.getSelection().trim();
@@ -84,7 +83,7 @@ export default class HadithLookupPlugin extends Plugin {
 		});
 
 		this.addCommand({
-			id: 'search-hadith-command',
+			id: 'search-hadith',
 			name: 'Search Hadith Unlocked',
 			editorCallback: async (editor: Editor, view: MarkdownView) => {
 				try {
