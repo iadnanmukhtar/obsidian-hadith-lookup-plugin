@@ -46,9 +46,9 @@ export default class HadithLookupPlugin extends Plugin {
 
 		this.addCommand({
 			id: 'fetch-hadith',
-			name: 'Fetch Quran or Hadith',
+			name: 'Fetch hadith or quran using the selected reference',
 			editorCallback: async (editor: Editor, view: MarkdownView) => {
-				let ref = editor.getSelection().trim();
+				let ref = editor.getSelection().trim().toLowerCase();
 				let templateType = 'hadith';
 				if (ref.startsWith('quran'))
 					templateType = 'quran';
@@ -75,7 +75,7 @@ export default class HadithLookupPlugin extends Plugin {
 						editor.replaceSelection(JSON.stringify(result[0]));
 
 				} catch (error) {
-					new Notice(`Lookup Failed: ${error.message}`);
+					new Notice(`Lookup failed: ${error.message}`);
 					console.error(error.stack);
 				}
 
@@ -84,7 +84,7 @@ export default class HadithLookupPlugin extends Plugin {
 
 		this.addCommand({
 			id: 'search-hadith',
-			name: 'Search Hadith Unlocked',
+			name: 'Find hadith or Quran using the selected text',
 			editorCallback: async (editor: Editor, view: MarkdownView) => {
 				try {
 
@@ -98,7 +98,7 @@ export default class HadithLookupPlugin extends Plugin {
 					editor.replaceSelection(`* * *\n\n${text}* * *\n`);
 
 				} catch (error) {
-					new Notice(`Lookup Failed: ${error.message}`);
+					new Notice(`Lookup failed: ${error.message}`);
 					console.error(error.stack);
 				}
 
@@ -132,11 +132,9 @@ class HadithLookupSettingTab extends PluginSettingTab {
 
 		containerEl.empty();
 
-		containerEl.createEl('h2', { text: 'Hadith Lookup Plugin Settings' });
-
 		new Setting(containerEl)
 			.setName('API')
-			.setDesc('Hadith Lookup API: Default is the Ḥadīth Unlocked API')
+			.setDesc('Hadith lookup API: Default is the Hadith Unlocked API')
 			.addText(text => text
 				.setPlaceholder('')
 				.setValue(this.plugin.settings.api)
@@ -146,7 +144,7 @@ class HadithLookupSettingTab extends PluginSettingTab {
 				}));
 
 		new Setting(containerEl)
-			.setName('Quran Template')
+			.setName('Quran template')
 			.setDesc('For single ayah references, e.g. quran:2:255')
 			.addTextArea(text => text
 				.setPlaceholder('')
@@ -158,7 +156,7 @@ class HadithLookupSettingTab extends PluginSettingTab {
 
 
 		new Setting(containerEl)
-			.setName('Quran Passage Template')
+			.setName('Quran passage template')
 			.setDesc('For passage references e.g. quran:2:255-258')
 			.addTextArea(text => text
 				.setPlaceholder('')
@@ -169,8 +167,8 @@ class HadithLookupSettingTab extends PluginSettingTab {
 				}));
 
 		new Setting(containerEl)
-			.setName('Hadith Template')
-			.setDesc('For hadith references e.g. muslim:55a of Hadith Unlocked')
+			.setName('Hadith template')
+			.setDesc('For hadith references e.g. muslim:55a')
 			.addTextArea(text => text
 				.setPlaceholder('')
 				.setValue(this.plugin.settings.hadithTemplate)
