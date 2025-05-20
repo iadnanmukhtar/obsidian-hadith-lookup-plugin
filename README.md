@@ -75,3 +75,26 @@ See the example JSON respones of Hadith Unlocked for the following references:
 > {result[0].footnote_en} – {result[0].grade.grade_en} ({result[0].grader. shortName_en})
 ```
 
+## My Personal Tempaltes:
+- **Quran (Single Āyah)**
+```
+**Quran: {result[0].title_en}**
+- ~~﴿{result[0].body} ۝ ﴾ ([{result[0].chapter.title} {result[0].num_ar}](https://hadithunlocked.com/{result[0].ref}))~~
+> > {result[0].body_en}
+
+```
+- **Quran (Āyah Range / Passage)**
+```
+**Quran: {result[0].title_en}**
+- ~~﴿{result[0].body}﴾ ([{result[0].chapter.title} {result[0].num_ar}](https://hadithunlocked.com/{result[0].ref}))~~
+> > {result[0].body_en}
+
+```
+- **Hadith**
+```
+**Hadith: {result[0].title_en}**
+- ~~«{result[0].body}» ([{result[0].book_shortName} {result[0].num_ar}](https://hadithunlocked.com/{result[0].ref}) {result[0].grade_grade})~~
+> > {result[0].body_en}
+
+```
+
