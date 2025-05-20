@@ -1,0 +1,152 @@
+@font-face {
+	font-family: Arabic;
+	src: url('https://hadithunlocked.com/fonts/kd-hafs.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: ArabicBold;
+	src: url('https://hadithunlocked.com/fonts/kd-hafs.woff2') format('woff2');
+}
+
+.view-content .w05 {
+	width: 5em;
+}
+
+.view-content .w1 {
+	width: 10em;
+}
+
+.view-content .w2 {
+	width: 20em;
+}
+
+.view-content .w3 {
+	width: 30em;
+}
+
+.view-content .w4 {
+	width: 40em;
+}
+
+.view-content .w6 {
+	width: 60em;
+}
+
+.view-content .w7 {
+	width: 70em;
+}
+
+.view-content .wp35 {
+	width: 35%;
+}
+
+.view-content .wp40 {
+	width: 40%;
+}
+
+.view-content .wp50 {
+	width: 50%;
+}
+
+.view-content .wp65 {
+	width: 65%;
+}
+
+.view-content .wp70 {
+	width: 70%;
+}
+
+.view-content table, th, td {
+	border-collapse: collapse;
+	border: 1px solid #e0e0e0;
+}
+
+.view-content td,
+.view-content th,
+.view-content .th {
+	text-align: left;
+	padding-right: 1em;
+	padding-left: 1em;
+}
+
+.view-content th {
+	background-color: #f8f8f8;
+}
+
+.view-content .th-ar {
+	text-align: right;
+	text-align-last: right;
+	padding-right: 1.5em;
+	padding-left: 1.5em;
+}
+
+.view-content tr {
+	vertical-align: top;
+}
+.view-content td.esm-rtl,
+.view-content th.esm-rtl,
+.view-content td:lang(ar),
+.view-content th:lang(ar) {
+	direction: rtl;
+	text-align: right;
+	text-align-last: right;
+	vertical-align: top !important;
+	font-family: "Arabic" !important;
+	font-size: 1.5em;
+	line-height: normal;
+	padding-right: 1em;
+	padding-left: 1em;
+}
+
+del,
+.cm-strikethrough {
+	color: inherit;
+	font-family: "Arabic";
+	font-size: 1.5em;
+	direction: rtl;
+	text-decoration: none;
+}
+
+del+br {
+	content: "A" !important;
+    display: block !important;
+    margin-bottom: 0.75em !important;
+}
+div.cm-line:has(.cm-strikethrough) {
+	padding-top: 0.5em !important;
+}
+
+
+del b,
+del strong,
+.HyperMD-header .cm-strikethrough,
+.cm-strikethrough b,
+.cm-strikethrough strong,
+.cm-strikethrough.cm-strong {
+	font-family: "ArabicBold";
+	font-weight: bold;
+	color: blue;
+}
+
+li:has(del) {
+	direction: rtl;
+}
+
+del strong em,
+.cm-strikethrough.cm-em.cm-strong {
+	font-style: normal;
+	font-weight: 400;
+	font-size: 1.25em !important;
+	font-family: "Noto Nastaliq Urdu";
+}
+
+del strong em {
+	font-size: 0.75em !important;
+}
+
+.HyperMD-quote-2,
+blockquote blockquote {
+	font-size: .75em;
+	line-height: normal;
+	color: #a0a0a0 !important;
+}
