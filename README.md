@@ -2,8 +2,6 @@
 
 An Obsidian plugin that uses selected text as a reference ID to lookup and insert Quran and Hadith text and translation using the **[Hadith Unlocked](https://hadithunlocked.com)** API.
 
-> This plugin is pending publishing to the Obsidian Community plugins. Follow this README for updates.
-
 ## Usage
 - Within Obsdian, find and install the plugin from the Community plugins
 - Within your Obsidian Note, type in a Hadith Unlocked reference ID, e.g. quran:2:255 or bukhari:99, ideally on a new line
