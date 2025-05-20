@@ -1,6 +1,6 @@
 {
 	"name": "obsidian-hadith-lookup-plugin",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "An Obsidian plugin that uses selected text as a reference ID to lookup and insert Quran and Hadith text and translation using the Ḥadīth Unlocked API (https://hadith.quranunlocked.com)",
 	"main": "main.js",
 	"scripts": {

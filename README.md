@@ -75,7 +75,7 @@ See the example JSON respones of Hadith Unlocked for the following references:
 > {result[0].footnote_en} – {result[0].grade.grade_en} ({result[0].grader. shortName_en})
 ```
 
-## My Personal Tempaltes:
+### My Personal Tempaltes:
 - **Quran (Single Āyah)**
 ```
 **Quran: {result[0].title_en}**
