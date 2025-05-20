@@ -25,13 +25,13 @@ const DEFAULT_SETTINGS: HadithLookupSettings = {
 `,
 	hadithTemplate:
 		`> [!tip] {result[0].title_en}
-> {result[0].book.shortName} {result[0].num} - {result[0].chain}
+> {result[0].book_shortName} {result[0].num} - {result[0].chain}
 > {result[0].body} 
-> {result[0].footnote} – {result[0].grade.grade} ({result[0].grader. shortName})
+> {result[0].footnote} – {result[0].grade_grade} ({result[0].grader_shortName})
 > 
-> [[{result[0].book.shortName_en} {result[0].num}]] - {result[0].chain_en}
+> [[{result[0].book_shortName_en} {result[0].num}]] - {result[0].chain_en}
 > {result[0].body_en}
-> {result[0].footnote_en} – {result[0].grade.grade_en} ({result[0].grader. shortName_en})
+> {result[0].footnote_en} – {result[0].grade_grade_en} ({result[0].grader_shortName_en})
 
 `,
 }
@@ -46,7 +46,7 @@ export default class HadithLookupPlugin extends Plugin {
 
 		this.addCommand({
 			id: 'fetch-hadith',
-			name: 'Fetch hadith or quran using the selected reference',
+			name: 'Fetch hadith or Quran using the selected reference',
 			editorCallback: async (editor: Editor, view: MarkdownView) => {
 				let ref = editor.getSelection().trim().toLowerCase();
 				let templateType = 'hadith';

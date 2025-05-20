@@ -1,7 +1,7 @@
 {
 	"id": "hadith-lookup",
 	"name": "Hadith Lookup",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"minAppVersion": "0.0.0",
 	"description": "Inserts Hadith and Quranic ayat and passages using a reference ID from the Ḥadīth Unlocked API (https://hadithunlocked.com)",
 	"author": "Adnan Mukhtar",
