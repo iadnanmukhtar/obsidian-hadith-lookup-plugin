@@ -52,14 +52,14 @@ See the example JSON respones of Hadith Unlocked for the following references:
 - **Quran (Single Āyah)**
 ```
 > [!note]
-> {result[0].chapter.title} {result[0].num_ar} - {result[0].body}
+> {result[0].chapter.title} {result[0].ar.num} - {result[0].body}
 > 
 > [[{result[0].chapter.title_en} {result[0].num}]] - {result[0].body_en}
 ```
 - **Quran (Āyah Range / Passage)**
 ```
 > [!note]
-> {result[0].chapter.title} {result[0].num_ar} - {result[0].body}
+> {result[0].chapter.title} {result[0].ar.num} - {result[0].body}
 > 
 > [[{result[0].chapter.title_en} {result[0].num}]] - {result[0].body_en}
 ```
@@ -79,21 +79,21 @@ See the example JSON respones of Hadith Unlocked for the following references:
 - **Quran (Single Āyah)**
 ```
 **Quran: {result[0].title_en}**
-- ~~﴿{result[0].body} ۝ ﴾ ([{result[0].chapter.title} {result[0].num_ar}](https://hadithunlocked.com/{result[0].ref}))~~
+- ~~﴿{result[0].body} ۝ ﴾ ([{result[0].chapter.title} {result[0].ar.num}](https://hadithunlocked.com/{result[0].ref}))~~
 > > {result[0].body_en}
 
 ```
 - **Quran (Āyah Range / Passage)**
 ```
 **Quran: {result[0].title_en}**
-- ~~﴿{result[0].body}﴾ ([{result[0].chapter.title} {result[0].num_ar}](https://hadithunlocked.com/{result[0].ref}))~~
+- ~~﴿{result[0].body}﴾ ([{result[0].chapter.title} {result[0].ar.num}](https://hadithunlocked.com/{result[0].ref}))~~
 > > {result[0].body_en}
 
 ```
 - **Hadith**
 ```
 **Hadith: {result[0].title_en}**
-- ~~«{result[0].body}» ([{result[0].book_shortName} {result[0].num_ar}](https://hadithunlocked.com/{result[0].ref}) {result[0].grade_grade})~~
+- ~~«{result[0].body}» ([{result[0].book_shortName} {result[0].ar.num}](https://hadithunlocked.com/{result[0].ref}) {result[0].grade_grade})~~
 > > {result[0].body_en}
 
 ```
