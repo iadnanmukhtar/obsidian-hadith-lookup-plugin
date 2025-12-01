@@ -108,7 +108,6 @@ del,
 	color: inherit;
 	font-family: "Arabic";
 	font-size: 1.5em;
-	direction: rtl;
 	text-decoration: none;
 }
 
@@ -133,10 +132,7 @@ del strong,
 	color: blue;
 }
 
-li:has(del) {
-	direction: rtl;
-}
-
+s strong em,
 del strong em,
 .cm-strikethrough.cm-em.cm-strong {
 	font-style: normal;
@@ -145,6 +141,7 @@ del strong em,
 	font-family: "Noto Nastaliq Urdu";
 }
 
+s strong em,
 del strong em {
 	font-size: 0.75em !important;
 }
