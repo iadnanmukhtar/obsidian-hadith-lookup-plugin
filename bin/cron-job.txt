@@ -1,0 +1,5 @@
+Add this line to your crontab to restart Elasticsearch every 6 hours:
+
+0 */6 * * * /Users/adnanmukhtar/Documents/Projects/obsidian-hadith-lookup-plugin/bin/restart-elasticsearch.sh >> /tmp/elasticsearch-restart.log 2>&1
+
+If your repository path differs, update the absolute path accordingly. Install with `crontab -e`.
