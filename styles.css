@@ -1,8 +1,3 @@
-/*
- * Hadith Lookup Plugin Styles.
- *
-*/
-
 @font-face {
 	font-family: Arabic;
 	src: url('https://hadithunlocked.com/fonts/kd-hafs.woff2') format('woff2');
@@ -97,7 +92,7 @@
 	text-align-last: right;
 	vertical-align: top !important;
 	font-family: "Arabic" !important;
-	font-size: 1.5em;
+	font-size: 125% !important;
 	line-height: normal;
 	padding-right: 1em;
 	padding-left: 1em;
@@ -107,7 +102,8 @@ del,
 .cm-strikethrough {
 	color: inherit;
 	font-family: "Arabic";
-	font-size: 1.5em;
+	font-size: 125% !important;
+	direction: rtl;
 	text-decoration: none;
 }
 
@@ -120,19 +116,24 @@ div.cm-line:has(.cm-strikethrough) {
 	padding-top: 0.5em !important;
 }
 
-
 del b,
 del strong,
-.HyperMD-header .cm-strikethrough,
 .cm-strikethrough b,
 .cm-strikethrough strong,
 .cm-strikethrough.cm-strong {
 	font-family: "ArabicBold";
 	font-weight: bold;
-	color: blue;
+	color: rgb(0, 0, 195);
 }
 
-s strong em,
+.HyperMD-header-1 {
+
+}
+
+li:has(del) {
+	direction: rtl;
+}
+
 del strong em,
 .cm-strikethrough.cm-em.cm-strong {
 	font-style: normal;
@@ -141,7 +142,6 @@ del strong em,
 	font-family: "Noto Nastaliq Urdu";
 }
 
-s strong em,
 del strong em {
 	font-size: 0.75em !important;
 }

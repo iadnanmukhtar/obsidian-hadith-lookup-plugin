@@ -36,6 +36,11 @@ const DEFAULT_SETTINGS: HadithLookupSettings = {
 `,
 }
 
+const HADITH_BOOK_IDS = new Set([
+	'bukhari', 'muslim', 'nasai', 'abudawud', 'tirmidhi', 'ibnmajah', 'ahmad', 'darami', 'hakim',
+	'ibnhibban', 'tabarani', 'nasai-kubra', 'bayhaqi', 'suyuti',
+]);
+
 export default class HadithLookupPlugin extends Plugin {
 
 	settings: HadithLookupSettings;
@@ -48,7 +53,9 @@ export default class HadithLookupPlugin extends Plugin {
 			id: 'fetch-hadith',
 			name: 'Fetch hadith or Quran using the selected reference',
 			editorCallback: async (editor: Editor, view: MarkdownView) => {
-				let ref = editor.getSelection().trim().toLowerCase();
+				let ref = normalizeReference(editor.getSelection());
+				if (isBareQuranReference(ref))
+					ref = `quran:${ref}`;
 				let templateType = 'hadith';
 				if (ref.startsWith('quran'))
 					templateType = 'quran';
@@ -178,6 +185,32 @@ class HadithLookupSettingTab extends PluginSettingTab {
 				}));
 
 	}
+}
+
+function normalizeReference(ref: string) {
+	const normalizedRef = ref
+		.trim()
+		.toLowerCase()
+		.replace(/\s*:\s*/g, ':')
+		.replace(/\s+/g, ' ');
+
+	if (normalizedRef.match(/^(?:quran|passage)(?::|\s+)[a-z0-9'_-]+(?::|\s+)\d+(?:-\d+)?$/))
+		return normalizedRef.replace(/[:\s]+/g, ':');
+	if (normalizedRef.match(/^[a-z0-9'_-]+(?::|\s+)\d+[a-z]?(?:-\d+[a-z]?)?$/))
+		return normalizedRef.replace(/[:\s]+/g, ':');
+
+	return normalizedRef;
+}
+
+function isBareQuranReference(ref: string) {
+	if (ref.match(/^\d+:\d+(?:-\d+)?$/))
+		return true;
+
+	const match = ref.match(/^([a-z0-9'_-]+):\d+(?:-\d+)?$/);
+	if (!match)
+		return false;
+
+	return !HADITH_BOOK_IDS.has(match[1]);
 }
 
 function fillIn(s: string, result: any) {
