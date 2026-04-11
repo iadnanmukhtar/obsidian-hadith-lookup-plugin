@@ -92,7 +92,7 @@
 	text-align-last: right;
 	vertical-align: top !important;
 	font-family: "Arabic" !important;
-	font-size: 125% !important;
+	font-size: 1.5em;
 	line-height: normal;
 	padding-right: 1em;
 	padding-left: 1em;
@@ -102,7 +102,7 @@ del,
 .cm-strikethrough {
 	color: inherit;
 	font-family: "Arabic";
-	font-size: 125% !important;
+	font-size: 1.5em;
 	direction: rtl;
 	text-decoration: none;
 }
@@ -116,18 +116,16 @@ div.cm-line:has(.cm-strikethrough) {
 	padding-top: 0.5em !important;
 }
 
+
 del b,
 del strong,
+.HyperMD-header .cm-strikethrough,
 .cm-strikethrough b,
 .cm-strikethrough strong,
 .cm-strikethrough.cm-strong {
 	font-family: "ArabicBold";
 	font-weight: bold;
-	color: rgb(0, 0, 195);
-}
-
-.HyperMD-header-1 {
-
+	color: blue;
 }
 
 li:has(del) {
