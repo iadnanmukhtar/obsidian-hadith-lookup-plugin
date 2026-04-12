@@ -4,7 +4,7 @@ An Obsidian plugin that uses selected text as a reference ID to lookup and inser
 
 ## Usage
 - Within Obsdian, find and install the plugin from the Community plugins
-- Within your Obsidian Note, type in a Hadith Unlocked reference ID, e.g. quran:2:255, 2:255, or bukhari:99, ideally on a new line
+- Within your Obsidian Note, type in a Hadith Unlocked reference ID, e.g. quran:2:255 or bukhari:99, ideally on a new line
 - Select the reference text you typed-in ealier
 - Open the Obsidian Command palette and search for "Fetch Hadith"
 - The reference text will be replaced by the content of that reference from Hadith Unlocked
@@ -13,10 +13,8 @@ An Obsidian plugin that uses selected text as a reference ID to lookup and inser
 There are two types of references you can use with this plugin:
 ### Quran: Single Āyah or a Range
 - quran:2:255
-- 2:255
 - quran:baqarah:255
 - quran:3:190-194
-- 3:190-194
 - quran:ta-ha:9-15
 - etc.
 ### Hadith
@@ -99,3 +97,4 @@ See the example JSON respones of Hadith Unlocked for the following references:
 > > {result[0].body_en}
 
 ```
+

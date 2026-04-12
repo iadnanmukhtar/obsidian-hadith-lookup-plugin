@@ -7,8 +7,6 @@ interface HadithLookupSettings {
 	hadithTemplate: string;
 }
 
-type TemplateType = 'quran' | 'passage' | 'hadith';
-
 const DEFAULT_SETTINGS: HadithLookupSettings = {
 	api: 'https://hadithunlocked.com/{result.ref}?json',
 	quranTemplate:
@@ -50,8 +48,17 @@ export default class HadithLookupPlugin extends Plugin {
 			id: 'fetch-hadith',
 			name: 'Fetch hadith or Quran using the selected reference',
 			editorCallback: async (editor: Editor, view: MarkdownView) => {
-				const rawRef = editor.getSelection().trim().toLowerCase();
-				const { ref, templateType } = normalizeReference(rawRef);
+				let ref = editor.getSelection().trim().toLowerCase();
+				let templateType = 'hadith';
+				if (ref.startsWith('quran'))
+					templateType = 'quran';
+				if (ref.match(/^quran:.+:\d+-\d+/) || ref.match(/^quran:.+:\d+/)) {
+					ref = ref.replace(/^quran/, 'passage');
+					templateType = 'passage';
+				}
+				if (ref.match(/^quran:.+:\d+/)) {
+					ref = ref.replace(/(\d+)/, '$1-$1');
+				}
 				try {
 					const res = await fetch(fillIn(this.settings.api, { ref: ref }));
 					const resStr = await res.text();
@@ -138,7 +145,7 @@ class HadithLookupSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Quran template')
-			.setDesc('For single ayah references, e.g. quran:2:255 or 2:255')
+			.setDesc('For single ayah references, e.g. quran:2:255')
 			.addTextArea(text => text
 				.setPlaceholder('')
 				.setValue(this.plugin.settings.quranTemplate)
@@ -150,7 +157,7 @@ class HadithLookupSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Quran passage template')
-			.setDesc('For passage references e.g. quran:2:255-258 or 2:255-258')
+			.setDesc('For passage references e.g. quran:2:255-258')
 			.addTextArea(text => text
 				.setPlaceholder('')
 				.setValue(this.plugin.settings.passageTemplate)
@@ -183,43 +190,4 @@ function fillIn(s: string, result: any) {
 		}
 	}
 	return s;
-}
-
-function normalizeReference(ref: string): { ref: string; templateType: TemplateType } {
-	const explicitQuranPassageMatch = ref.match(/^quran:(.+):(\d+)-(\d+)$/);
-	if (explicitQuranPassageMatch) {
-		return {
-			ref: `passage:${explicitQuranPassageMatch[1]}:${explicitQuranPassageMatch[2]}-${explicitQuranPassageMatch[3]}`,
-			templateType: 'passage',
-		};
-	}
-
-	const explicitQuranSingleMatch = ref.match(/^quran:(.+):(\d+)$/);
-	if (explicitQuranSingleMatch) {
-		return {
-			ref,
-			templateType: 'quran',
-		};
-	}
-
-	const numericQuranPassageMatch = ref.match(/^(\d+):(\d+)-(\d+)$/);
-	if (numericQuranPassageMatch) {
-		return {
-			ref: `passage:${numericQuranPassageMatch[1]}:${numericQuranPassageMatch[2]}-${numericQuranPassageMatch[3]}`,
-			templateType: 'passage',
-		};
-	}
-
-	const numericQuranSingleMatch = ref.match(/^(\d+):(\d+)$/);
-	if (numericQuranSingleMatch) {
-		return {
-			ref: `quran:${numericQuranSingleMatch[1]}:${numericQuranSingleMatch[2]}`,
-			templateType: 'quran',
-		};
-	}
-
-	return {
-		ref,
-		templateType: 'hadith',
-	};
 }
